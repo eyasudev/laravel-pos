@@ -85,5 +85,9 @@
             @yield('content')
         </main>
     </div>
+    <script>
+        var root_url = <?php echo json_encode(route('data')) ?>;
+    </script>
+    @stack('ajax_crud')
 </body>
 </html>

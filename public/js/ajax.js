@@ -1,5 +1,4 @@
 $(document).ready(function () {
-    console.log('ready');
     get_company_data()
 
     $.ajaxSetup({
@@ -10,7 +9,6 @@ $(document).ready(function () {
 
     //Get all company
     function get_company_data() {
-
         $.ajax({
             url: root_url,
             type: 'GET',
@@ -41,11 +39,11 @@ $(document).ready(function () {
     }
 
     //Insert company data
-    $("body").on("click", "#createNewCompany", function (e) {
+    $("body").on("click", "#createNewCustomer", function (e) {
 
         e.preventDefault;
-        $('#userCrudModal').html("Create company");
-        $('#submit').val("Create company");
+        $('#userCrudModal').html("Create customer");
+        $('#submit').val("Create customer");
         $('#modal-id').modal('show');
         $('#company_id').val('');
         $('#companydata').trigger("reset");

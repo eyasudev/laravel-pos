@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\customer;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class CustomerController extends Controller
 {
@@ -16,6 +17,16 @@ class CustomerController extends Controller
     {
         return view('customer.index');
     }
+
+    public function get_company_data(Request $request)
+  {
+      $customers = Customer::latest()->paginate(5);
+
+      return \Request::ajax() ? 
+                   response()->json($customers,Response::HTTP_OK) 
+                   : abort(404);
+  }
+
 
     /**
      * Show the form for creating a new resource.

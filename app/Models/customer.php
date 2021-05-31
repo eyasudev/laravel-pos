@@ -13,6 +13,6 @@ class customer extends Model
         'name',
         'phone_number',
         'area'
-    ]
+    ];
     
 }

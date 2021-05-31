@@ -23,6 +23,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
 Route::get('/customer', [App\Http\Controllers\CustomerController::class, 'index'])->name('home');
+
+Route::get('/customers', [App\Http\Controllers\CustomerController::class, 'get_company_data'])->name('data');
