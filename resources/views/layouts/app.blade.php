@@ -87,6 +87,7 @@
     </div>
     <script>
         var root_url = <?php echo json_encode(route('data')) ?>;
+        var store = <?php echo json_encode(route('customer.store')) ?>;
     </script>
     @stack('ajax_crud')
 </body>

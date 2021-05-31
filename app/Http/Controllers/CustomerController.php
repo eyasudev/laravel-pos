@@ -44,10 +44,26 @@ class CustomerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function Store(Request $request)
     {
-        //
-    }
+        Customer::updateOrCreate(
+        [
+            'id' => $request->id
+        ],
+        [
+            'name' => $request->name,
+            'area' => $request->address,
+            'phone_number' => $request->phoneNumber
+        ]
+        );
+
+        return response()->json(
+        [
+        'success' => true,
+        'message' => 'Data inserted successfully'
+         ]
+        );
+  }
 
     /**
      * Display the specified resource.

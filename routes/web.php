@@ -24,5 +24,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Auth::routes();
 
 Route::get('/customer', [App\Http\Controllers\CustomerController::class, 'index'])->name('home');
-
 Route::get('/customers', [App\Http\Controllers\CustomerController::class, 'get_company_data'])->name('data');
+Route::post('/addcustomer', [App\Http\Controllers\CustomerController::class, 'Store'])->name('customer.store');

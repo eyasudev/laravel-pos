@@ -27,7 +27,7 @@ $(document).ready(function () {
 
             rows = rows + '<tr>';
             rows = rows + '<td>' + value.name + '</td>';
-            rows = rows + '<td>' + value.address + '</td>';
+            rows = rows + '<td>' + value.phone_number + '</td>';
             rows = rows + '<td data-id="' + value.id + '">';
             rows = rows + '<a class="btn btn-sm btn-outline-danger py-0" style="font-size: 0.8em;" id="editCompany" data-id="' + value.id + '" data-toggle="modal" data-target="#modal-id">Edit</a> ';
             rows = rows + '<a class="btn btn-sm btn-outline-danger py-0" style="font-size: 0.8em;" id="deleteCompany" data-id="' + value.id + '" >Delete</a> ';
@@ -56,6 +56,7 @@ $(document).ready(function () {
         var id = $("#company_id").val();
         var name = $("#name").val();
         var address = $("#address").val();
+        var phoneNumber = $("#phone_number").val();
 
         $.ajax({
             url: store,
@@ -63,7 +64,8 @@ $(document).ready(function () {
             data: {
                 id: id,
                 name: name,
-                address: address
+                address: address,
+                phoneNumber: phoneNumber
             },
             dataType: 'json',
             success: function (data) {
@@ -80,7 +82,7 @@ $(document).ready(function () {
                 get_company_data()
             },
             error: function (data) {
-                console.log('Error......');
+                console.log( data );
             }
         });
     });
