@@ -45,7 +45,7 @@ $(document).ready(function () {
         $('#userCrudModal').html("Create customer");
         $('#submit').val("Create customer");
         $('#modal-id').modal('show');
-        $('#company_id').val('');
+        $('#customer_id').val('');
         $('#companydata').trigger("reset");
 
     });
@@ -53,11 +53,11 @@ $(document).ready(function () {
     //Save data into database
     $('body').on('click', '#submit', function (event) {
         event.preventDefault()
-        var id = $("#company_id").val();
+        var id = $("#customer_id").val();
         var name = $("#name").val();
         var address = $("#address").val();
         var phoneNumber = $("#phone_number").val();
-
+        
         $.ajax({
             url: store,
             type: "POST",
@@ -94,13 +94,14 @@ $(document).ready(function () {
         var id = $(this).data('id');
 
         $.get(store + '/' + id + '/edit', function (data) {
-
-            $('#userCrudModal').html("Edit company");
-            $('#submit').val("Edit company");
+        
+            $('#userCrudModal').html("Edit customer");
+            $('#submit').val("Edit customer");
             $('#modal-id').modal('show');
-            $('#company_id').val(data.data.id);
+            $('#customer_id').val(data.data.id);
             $('#name').val(data.data.name);
-            $('#address').val(data.data.address);
+            $('#address').val(data.data.area);
+            $('#phone_number').val(data.data.phone_number);
         })
     });
 

@@ -44,7 +44,7 @@ class CustomerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function Store(Request $request)
+    public function store(Request $request)
     {
         Customer::updateOrCreate(
         [
@@ -94,9 +94,14 @@ class CustomerController extends Controller
      * @param  \App\Models\customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, customer $customer)
+    public function update($id)
     {
         //
+        $customer  = Customer::find($id);
+
+        return response()->json([
+         'data' => $customer
+        ]);
     }
 
     /**
@@ -105,8 +110,14 @@ class CustomerController extends Controller
      * @param  \App\Models\customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function destroy(customer $customer)
+    public function destroy($id)
     {
-        //
+        $customer = Customer::find($id);
+
+        $customer->delete();
+    
+        return response()->json([
+          'message' => 'Data deleted successfully!'
+        ]);
     }
 }
