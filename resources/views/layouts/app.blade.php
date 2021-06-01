@@ -11,6 +11,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <!-- <script src="{{ asset('js/ajax.js') }}" defer></script> -->
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -37,6 +38,9 @@
                         @else
                             <li class="nav-item">
                                 <a class="nav-link" href="/customer">Customer</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/product">Product</a>
                             </li>
                         @endguest
                     </ul>
@@ -84,5 +88,10 @@
             @yield('content')
         </main>
     </div>
+    <script>
+        var root_url = <?php echo json_encode(route('data')) ?>;
+        var store = <?php echo json_encode(route('customer.store')) ?>;
+    </script>
+    @stack('ajax_crud')
 </body>
 </html>

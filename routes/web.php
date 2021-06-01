@@ -23,6 +23,11 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
 Route::get('/customer', [App\Http\Controllers\CustomerController::class, 'index'])->name('home');
+Route::get('/customers', [App\Http\Controllers\CustomerController::class, 'get_company_data'])->name('data');
+Route::post('/addcustomer', [App\Http\Controllers\CustomerController::class, 'store'])->name('customer.store');
+Route::get('/addcustomer/{id}/edit', [App\Http\Controllers\CustomerController::class, 'update'])->name('customer.update');
+Route::delete('/addcustomer/{id}',  [App\Http\Controllers\CustomerController::class, 'destroy'])->name('customer.destroy');
+
+
+Route::get('/product', [App\Http\Controllers\ProductController::class, 'index'])->name('home');
