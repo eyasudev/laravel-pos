@@ -30,5 +30,5 @@
 @push('ajax_crud')
    <script src="/js/jquery.js"></script>  
    <script src="/js/sweetalert.js"></script>
-   <script src="/js/ajax.js"></script>
+   <script src="/js/customer.js"></script>
 @endpush

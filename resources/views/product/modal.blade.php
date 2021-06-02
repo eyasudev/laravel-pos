@@ -8,9 +8,9 @@
             </div>
 
             <div class="modal-body">
-                <form id="customerdata">
+                <form id="productdata">
 
-                    <input type="hidden" id="customer_id" name="customer_id" value="">
+                    <input type="hidden" id="product_id" name="product_id" value="">
                     <input type="text" id="name" name="name" value="" placeholder="Name">
                     <input type="text" id="phone_number" name="phone_number" value="" placeholder="Phone no">
                     <input type="text" id="address" name="address" value="" placeholder="Address">
