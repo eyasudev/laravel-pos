@@ -46,8 +46,7 @@ $(document).ready(function () {
         $('#submit').val("Create customer");
         $('#modal-id').modal('show');
         $('#customer_id').val('');
-        $('#companydata').trigger("reset");
-
+        $('#customerdata').trigger("reset");
     });
 
     //Save data into database
@@ -70,7 +69,7 @@ $(document).ready(function () {
             dataType: 'json',
             success: function (data) {
 
-                $('#companydata').trigger("reset");
+                $('#customerdata').trigger("reset");
                 $('#modal-id').modal('hide');
                 Swal.fire({
                     position: 'top-end',
