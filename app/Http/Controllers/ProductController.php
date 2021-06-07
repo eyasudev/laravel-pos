@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -15,6 +17,15 @@ class ProductController extends Controller
     public function index()
     {
         return view('product.index');
+    }
+
+    public function get_product_data(Request $request)
+    {
+      $products = Product::latest()->paginate(5);
+
+      return \Request::ajax() ? 
+                   response()->json($products,Response::HTTP_OK) 
+                   : abort(404);
     }
 
     /**
@@ -35,7 +46,28 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user_Id = Auth::user()->id;
+            
+        Product::updateOrCreate(
+            [
+                'id' => $request->id
+            ],
+            [
+                'product_name' => $request->productName,
+                'company_name' => $request->companyName,
+                'purchase_price' => $request->purchasePrice,
+                'trade_price' => $request->tradePrice,
+                'product_packing' => $request->productPacking,
+                'created_by' => $user_Id
+            ]
+            );
+    
+            return response()->json(
+            [
+            'success' => true,
+            'message' => 'Data inserted successfully'
+             ]
+            );
     }
 
     /**
@@ -67,9 +99,14 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update($id)
     {
         //
+        $product  = Product::find($id);
+
+        return response()->json([
+         'data' => $product
+        ]);
     }
 
     /**
@@ -78,8 +115,15 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
         //
+        $product = Product::find($id);
+
+        $product->delete();
+    
+        return response()->json([
+          'message' => 'Data deleted successfully!'
+        ]);
     }
 }

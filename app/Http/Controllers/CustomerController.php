@@ -19,13 +19,13 @@ class CustomerController extends Controller
     }
 
     public function get_company_data(Request $request)
-  {
+    {
       $customers = Customer::latest()->paginate(5);
 
       return \Request::ajax() ? 
                    response()->json($customers,Response::HTTP_OK) 
                    : abort(404);
-  }
+    }
 
 
     /**

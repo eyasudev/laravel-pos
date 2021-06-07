@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    get_company_data()
+    get_customer_data()
 
     $.ajaxSetup({
         headers: {
@@ -8,7 +8,7 @@ $(document).ready(function () {
     });
 
     //Get all company
-    function get_company_data() {
+    function get_customer_data() {
         $.ajax({
             url: root_url,
             type: 'GET',

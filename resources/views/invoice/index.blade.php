@@ -6,12 +6,12 @@
    <div class="row justify-content-center">
       <div class="col-md-12">
           <div class="card">
-            <a href="javascript:void(0)" class="btn btn-sm btn-outline-danger py-0" style="font-size: 0.8em; width:100px;" id="createNewProduct">Add Product</a>
+            <a href="javascript:void(0)" class="btn btn-sm btn-outline-danger py-0" style="font-size: 0.8em; width:100px;" id="createNewInvoice">Add Invoice</a>
             <table class="table table-bordered">
               <thead>
                   <tr>
-                     <th>Product Name</th>
-                     <th>Trade Price</th>
+                     <th>Invoice Id</th>
+                     <th>Customer Number</th>
                      <th width="200px">Action</th>
                   </tr>
               </thead>
@@ -20,7 +20,7 @@
               </tbody>
 
             </table>
-              @include('product.modal')
+              @include('invoice.modal')
            </div>
         </div>
     </div>
@@ -30,5 +30,5 @@
 @push('ajax_crud')
    <script src="/js/jquery.js"></script>  
    <script src="/js/sweetalert.js"></script>
-   <script src="/js/product.js"></script>
+   <script src="/js/invoice.js"></script>
 @endpush

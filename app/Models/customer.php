@@ -14,5 +14,10 @@ class customer extends Model
         'phone_number',
         'area'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
     
 }

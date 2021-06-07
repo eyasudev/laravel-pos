@@ -42,6 +42,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="/product">Product</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/invoice">Add New Invoice</a>
+                            </li>
                         @endguest
                     </ul>
 
@@ -91,6 +94,7 @@
     <script>
         var root_url = <?php echo json_encode(route('data')) ?>;
         var store = <?php echo json_encode(route('customer.store')) ?>;
+        var product_store = <?php echo json_encode(route('product.store')) ?>;
     </script>
     @stack('ajax_crud')
 </body>
