@@ -10,7 +10,7 @@ $(document).ready(function () {
     //Get all product
     function get_product_data() {
         $.ajax({
-            url: root_url,
+            url: product_url,
             type: 'GET',
             data: {}
         }).done(function (data) {

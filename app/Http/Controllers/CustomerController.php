@@ -18,13 +18,13 @@ class CustomerController extends Controller
         return view('customer.index');
     }
 
-    public function get_company_data(Request $request)
+    public function get_customer_data(Request $request)
     {
       $customers = Customer::latest()->paginate(5);
 
       return \Request::ajax() ? 
-                   response()->json($customers,Response::HTTP_OK) 
-                   : abort(404);
+                response()->json($customers,Response::HTTP_OK) 
+                : abort(404);
     }
 
 
@@ -63,7 +63,7 @@ class CustomerController extends Controller
         'message' => 'Data inserted successfully'
          ]
         );
-  }
+    }
 
     /**
      * Display the specified resource.

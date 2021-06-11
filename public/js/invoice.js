@@ -10,7 +10,7 @@ $(document).ready(function () {
     //Get all company
     function get_invoice_data() {
         $.ajax({
-            url: root_url,
+            url: invoice_url,
             type: 'GET',
             data: {}
         }).done(function (data) {
@@ -43,7 +43,7 @@ $(document).ready(function () {
     $("body").on("click", "#createNewInvoice", function (e) {
 
         e.preventDefault;
-        $('#userCrudModal').html("Create inovice");
+        $('#userCrudModal').html("Create Invoice");
         $('#submit').val("Create inovice");
         $('#modal-id').modal('show');
         $('#customer_id').val('');

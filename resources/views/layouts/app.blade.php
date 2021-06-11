@@ -93,6 +93,8 @@
     </div>
     <script>
         var root_url = <?php echo json_encode(route('data')) ?>;
+        var product_url = <?php echo json_encode(route('product_data')) ?>;
+        var invoice_url = <?php echo json_encode(route('invoice_data')) ?>;
         var store = <?php echo json_encode(route('customer.store')) ?>;
         var product_store = <?php echo json_encode(route('product.store')) ?>;
     </script>

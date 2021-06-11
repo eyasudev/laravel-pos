@@ -78,7 +78,7 @@ $(document).ready(function () {
                     showConfirmButton: false,
                     timer: 1500
                 })
-                get_company_data()
+                get_customer_data()
             },
             error: function (data) {
                 console.log( data );
@@ -127,7 +127,7 @@ $(document).ready(function () {
                         'Company deleted successfully!',
                         'success'
                     )
-                    get_company_data()
+                    get_customer_data();
                 }
             });
         return false;

@@ -15,4 +15,9 @@ class InvoiceController extends Controller
     {
         return view('invoice.index');
     }
+
+
+    public function get_invoices_data() {
+        
+    }
 }
