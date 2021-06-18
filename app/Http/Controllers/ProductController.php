@@ -19,6 +19,10 @@ class ProductController extends Controller
         return view('product.index');
     }
 
+    /**
+     * get Product Data
+     * 
+     */
     public function get_product_data(Request $request)
     {
       $products = Product::latest()->paginate(5);

@@ -1,4 +1,5 @@
 $(document).ready(function () {
+
     get_invoice_data()
 
     $.ajaxSetup({
@@ -15,6 +16,27 @@ $(document).ready(function () {
             data: {}
         }).done(function (data) {
             table_data_row(data.data)
+            
+        });
+    }
+
+
+    //Get all company
+    function get_invoice_data_on_modal_load() {
+        $.ajax({
+            url: get_invoice_url,
+            type: 'GET',
+            data: {}
+        }).done(function (data) {
+            $('.js-example-basic-single').select2({
+                theme: "classic",
+                placeholder: "Select customer",
+                allowClear: true,
+                width: '100%'
+            });
+            for ( var i = 0 ; i < data.customerData.length ; i++ ) {
+                $('.js-example-basic-single').append("<option value=" +  data.customerData[i].id + ">" + data.customerData[i].name + "</option>");
+            }
         });
     }
 
@@ -48,6 +70,9 @@ $(document).ready(function () {
         $('#modal-id').modal('show');
         $('#customer_id').val('');
         $('#customerdata').trigger("reset");
+
+        get_invoice_data_on_modal_load();
+
     });
 
 

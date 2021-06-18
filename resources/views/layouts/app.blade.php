@@ -11,6 +11,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/select2.min.js') }}" defer></script>
     <!-- <script src="{{ asset('js/ajax.js') }}" defer></script> -->
 
     <!-- Fonts -->
@@ -19,6 +20,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/select2.min.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
@@ -95,6 +97,7 @@
         var root_url = <?php echo json_encode(route('data')) ?>;
         var product_url = <?php echo json_encode(route('product_data')) ?>;
         var invoice_url = <?php echo json_encode(route('invoice_data')) ?>;
+        var get_invoice_url =<?php echo json_encode(route('get_invoice_data'))?>;
         var store = <?php echo json_encode(route('customer.store')) ?>;
         var product_store = <?php echo json_encode(route('product.store')) ?>;
     </script>

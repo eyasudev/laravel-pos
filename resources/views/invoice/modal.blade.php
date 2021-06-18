@@ -1,5 +1,5 @@
 <div class="modal fade" id="modal-id">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             
             <div class="modal-header">
@@ -9,7 +9,9 @@
 
             <div class="modal-body">
                 <form id="customerdata">
-
+                <select class="js-example-basic-single js-states form-control" name="state">
+                <option value=""></option>
+                </select>
                     <input type="hidden" id="customer_id" name="customer_id" value="">
                     <input type="text" id="name" name="name" value="" placeholder="Customer Name">
                     <input type="text" id="phone_number" name="phone_number" value="" placeholder="Phone no">

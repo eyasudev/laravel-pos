@@ -44,3 +44,4 @@ Route::delete('/addproduct/{id}',  [App\Http\Controllers\ProductController::clas
 
 // Invovice Route
 Route::get('/invoices', [App\Http\Controllers\InvoiceController::class, 'get_invoices_data'])->name('invoice_data');
+Route::get('/getinvoicedata', [App\Http\Controllers\InvoiceController::class, 'get_invoice_data_on_modal_load'])->name('get_invoice_data');
