@@ -28,7 +28,6 @@
 @endsection
 
 @push('ajax_crud')
-   <script src="/js/jquery.js"></script>  
    <script src="/js/sweetalert.js"></script>
    <script src="/js/invoice.js"></script>
 @endpush

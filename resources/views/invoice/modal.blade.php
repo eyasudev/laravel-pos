@@ -9,9 +9,14 @@
 
             <div class="modal-body">
                 <form id="customerdata">
-                <select class="js-example-basic-single js-states form-control" name="state">
-                <option value=""></option>
-                </select>
+                    <select class="js-customer js-states form-control" name="state">
+                        <option value=""></option>
+                    </select>
+                    <select class="js-product js-states form-control" name="state">
+                        <option value=""></option>
+                    </select>
+                    <input type="text" id="datepicker">
+                    <input type="text" id="name" name="name" value="" placeholder="Customer Name">
                     <input type="hidden" id="customer_id" name="customer_id" value="">
                     <input type="text" id="name" name="name" value="" placeholder="Customer Name">
                     <input type="text" id="phone_number" name="phone_number" value="" placeholder="Phone no">

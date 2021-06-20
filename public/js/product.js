@@ -1,3 +1,4 @@
+
 $(document).ready(function () {
     get_product_data();
 

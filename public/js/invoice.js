@@ -1,7 +1,10 @@
 $(document).ready(function () {
 
     get_invoice_data()
-
+    // // $( "#datepicker" ).datepicker();
+    // $('#datepicker').datetimepicker({
+    //     format: 'dd/mm/yyyy'
+    // });
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -28,14 +31,25 @@ $(document).ready(function () {
             type: 'GET',
             data: {}
         }).done(function (data) {
-            $('.js-example-basic-single').select2({
+            //
+            $('.js-customer').select2({
                 theme: "classic",
                 placeholder: "Select customer",
                 allowClear: true,
                 width: '100%'
             });
             for ( var i = 0 ; i < data.customerData.length ; i++ ) {
-                $('.js-example-basic-single').append("<option value=" +  data.customerData[i].id + ">" + data.customerData[i].name + "</option>");
+                $('.js-customer').append("<option value=" +  data.customerData[i].id + ">" + data.customerData[i].name + "</option>");
+            }
+
+            $('.js-product').select2({
+                theme: "classic",
+                placeholder: "Select product",
+                allowClear: true,
+                width: '100%'
+            });
+            for ( var i = 0 ; i < data.products.length ; i++ ) {
+                $('.js-product').append("<option value=" +  data.products[i].id + ">" + data.products[i].product_name + "</option>");
             }
         });
     }
