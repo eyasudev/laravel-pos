@@ -1,7 +1,8 @@
 $(document).ready(function () {
 
     get_invoice_data()
-    // // $( "#datepicker" ).datepicker();
+    
+    $( "#datepicker" ).datepicker();
     // $('#datepicker').datetimepicker({
     //     format: 'dd/mm/yyyy'
     // });
