@@ -8,12 +8,24 @@
             </div>
 
             <div class="modal-body">
-                <form id="customerdata">
+                <form id="customerdata">                   
+                    <div class="form-group row">    
+                        <div class="col">
+                            <input type="hidden" id="customer_id" name="customer_id" value="">  
+                            <input type="text" class="form-control" id="name" name="name" value="" placeholder="Customer Name">
+                        </div>
+                    </div>
+                        
+                    <div class="form-group row">
+                        <div class="col">
+                            <input type="text" class="form-control" id="phone_number" name="phone_number" value="" placeholder="Phone no">
+                        </div>
 
-                    <input type="hidden" id="customer_id" name="customer_id" value="">
-                    <input type="text" id="name" name="name" value="" placeholder="Name">
-                    <input type="text" id="phone_number" name="phone_number" value="" placeholder="Phone no">
-                    <input type="text" id="address" name="address" value="" placeholder="Address">
+                        <div class="col">
+                            <input type="text" class="form-control" id="address" name="address" value="" placeholder="Address">
+                        </div>
+                    </div>
+
                     </label><br>
 
                     <input type="submit" value="Submit" id="submit" class="btn btn-sm btn-outline-danger py-0" style="font-size: 0.8em;">
