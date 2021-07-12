@@ -91,4 +91,15 @@ $(document).ready(function () {
     });
 
 
+    //Save data into database
+    $('body').on('click', '#submit', function (event) {
+        var customerName =  $('#customer_name').val();
+        var dataPicker = $('#datepicker').val();
+        var productName = $('#product_name').val();
+        var productPrice = $('#product_price').val();
+        var productQuanlity = $('#product_quanlity').val();
+       
+    });
+
+
 });

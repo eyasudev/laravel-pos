@@ -1,6 +1,11 @@
 
 $(document).ready(function () {
     get_product_data();
+    var inputFieldsRegex = [
+        new RegExp(/^[a-z ,.'-]+$/i), // Customer name.
+        new RegExp(/^[a-zA-Z0-9\s,'-]*$/i), // Address.
+        new RegExp(/^(\+92|0|92)[0-9]{10}$/i) // Phone Number
+    ]
 
     $.ajaxSetup({
         headers: {
@@ -61,35 +66,43 @@ $(document).ready(function () {
         var tradePrice = $("#trade_price").val();
         var productPacking = $("#product_packing").val();
         
-        $.ajax({
-            url: product_store,
-            type: "POST",
-            data: {
-                id: id,
-                productName: productName,
-                companyName: companyName,
-                purchasePrice: purchasePrice,
-                tradePrice:tradePrice,
-                productPacking:productPacking
-            },
-            dataType: 'json',
-            success: function (data) {
+        if (    inputFieldsRegex[0].test( productName ) == true && inputFieldsRegex[0].test( companyName ) == true && 
+                inputFieldsRegex[2].test( purchasePrice ) == true && inputFieldsRegex[2].test( tradePrice ) == true &&
+                inputFieldsRegex[2].test( productPacking ) == true    
+            ) {
+                $.ajax({
+                    url: product_store,
+                    type: "POST",
+                    data: {
+                        id: id,
+                        productName: productName,
+                        companyName: companyName,
+                        purchasePrice: purchasePrice,
+                        tradePrice:tradePrice,
+                        productPacking:productPacking
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+        
+                        $('#customerdata').trigger("reset");
+                        $('#modal-id').modal('hide');
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Success',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                        get_product_data()
+                    },
+                    error: function (data) {
+                        console.log( data );
+                    }
+                });
 
-                $('#customerdata').trigger("reset");
-                $('#modal-id').modal('hide');
-                Swal.fire({
-                    position: 'top-end',
-                    icon: 'success',
-                    title: 'Success',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
-                get_product_data()
-            },
-            error: function (data) {
-                console.log( data );
-            }
-        });
+        } else {
+            alert();
+        }
     });
 
 
