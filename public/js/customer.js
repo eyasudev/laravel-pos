@@ -2,7 +2,7 @@ $(document).ready(function () {
     get_customer_data()
     var inputFieldsRegex = [
         new RegExp(/^[a-z ,.'-]+$/i), // Customer name.
-        new RegExp(/^[a-zA-Z0-9\s,'-]*$/i), // Address.
+        new RegExp(/^[a-zA-Z0-9 \s,'-]*$/i), // Address.
         new RegExp(/^(\+92|0|92)[0-9]{10}$/i) // Phone Number
     ]
 
@@ -46,8 +46,8 @@ $(document).ready(function () {
 
     //Insert company data
     $("body").on("click", "#createNewCustomer", function (e) {
-
         e.preventDefault;
+        $('#customerAlert').hide();
         $('#userCrudModal').html("Create customer");
         $('#submit').val("Create customer");
         $('#modal-id').modal('show');
@@ -92,7 +92,31 @@ $(document).ready(function () {
                 }
             });
         } else {
-            alert();
+            $('#customerAlert').show();
+
+            var customerInvalidInput = '';
+
+            if ( inputFieldsRegex[0].test( name ) == false ) {
+                customerInvalidInput = "Name";
+                $('#name').addClass('red');
+            } 
+
+            if ( !address || inputFieldsRegex[1].test( address ) == false ) {
+                customerInvalidInput += ", address ";
+                $('#address').addClass('red');
+            }
+
+            if ( !phoneNumber || inputFieldsRegex[1].test( phoneNumber ) == false ) {
+                customerInvalidInput += ", phoneNumber ";
+                $('#phone_number').addClass('red');
+            }
+            
+            customerInvalidInput += " cannot be empty or invalid."
+            
+            $('#customerAlert').val( customerInvalidInput );
+            $('#customerAlert').text( customerInvalidInput );
+
+            
         }
     });
 
