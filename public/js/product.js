@@ -2,8 +2,8 @@
 $(document).ready(function () {
     get_product_data();
     var inputFieldsRegex = [
-        new RegExp(/^[a-z ,.'-]+$/i), // Customer name.
-        new RegExp(/^[a-zA-Z0-9\s,'-]*$/i), // Address.
+        new RegExp(/^[a-z ,.'-]+$/i), 
+        new RegExp(/^[a-zA-Z0-9\s,'-]*$/i), // Company name/ Product.
         new RegExp(/^(\+92|0|92)[0-9]{10}$/i) // Phone Number
     ]
 
@@ -49,6 +49,7 @@ $(document).ready(function () {
     $("body").on("click", "#createNewProduct", function (e) {
 
         e.preventDefault;
+        $('#productAlert').hide();
         $('#userCrudProductModal').html("Create product");
         $('#submit').val("Create product");
         $('#modal-id').modal('show');
@@ -66,7 +67,7 @@ $(document).ready(function () {
         var tradePrice = $("#trade_price").val();
         var productPacking = $("#product_packing").val();
         
-        if (    inputFieldsRegex[0].test( productName ) == true && inputFieldsRegex[0].test( companyName ) == true && 
+        if (  productName && inputFieldsRegex[1].test( productName ) == true && companyName && inputFieldsRegex[0].test( companyName ) == true && 
                 inputFieldsRegex[2].test( purchasePrice ) == true && inputFieldsRegex[2].test( tradePrice ) == true &&
                 inputFieldsRegex[2].test( productPacking ) == true    
             ) {
@@ -101,7 +102,39 @@ $(document).ready(function () {
                 });
 
         } else {
-            alert();
+            $('#productAlert').show();
+
+            var productInvalidInput = '';
+
+            if ( !productName || inputFieldsRegex[1].test( productName ) == false ) {
+                productInvalidInput = "Product Name";
+                $('#product_name').addClass('red');
+            } 
+
+            if ( !companyName || inputFieldsRegex[1].test( companyName ) == false ) {
+                productInvalidInput += ", Company ";
+                $('#company_name').addClass('red');
+            }
+
+            if ( !purchasePrice || inputFieldsRegex[1].test( purchasePrice ) == false ) {
+                productInvalidInput += ", Purchase price ";
+                $('#purchase_price').addClass('red');
+            }
+
+            if ( !tradePrice || inputFieldsRegex[1].test( tradePrice ) == false ) {
+                productInvalidInput += ", Trade price ";
+                $('#trade_price').addClass('red');
+            }
+
+            if ( !productPacking || inputFieldsRegex[1].test( productPacking ) == false ) {
+                productInvalidInput += ", Product packing ";
+                $('#product_packing').addClass('red');
+            }
+            
+            productInvalidInput += " cannot be empty or invalid."
+            
+            $('#productAlert').val( productInvalidInput );
+            $('#productAlert').text( productInvalidInput );
         }
     });
 
