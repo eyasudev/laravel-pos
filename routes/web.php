@@ -38,6 +38,7 @@ Route::delete('/addcustomer/{id}',  [App\Http\Controllers\CustomerController::cl
 
 // Product Route
 Route::get('/products', [App\Http\Controllers\ProductController::class, 'get_product_data'])->name('product_data');
+Route::get('/products/{id}', [App\Http\Controllers\ProductController::class, 'get_product_data_by_id'])->name('product_data_by_id');
 Route::post('/addproduct', [App\Http\Controllers\ProductController::class, 'store'])->name('product.store');
 Route::get('/addproduct/{id}/edit', [App\Http\Controllers\ProductController::class, 'update'])->name('product.update');
 Route::delete('/addproduct/{id}',  [App\Http\Controllers\ProductController::class, 'destroy'])->name('product.destroy');
@@ -45,3 +46,4 @@ Route::delete('/addproduct/{id}',  [App\Http\Controllers\ProductController::clas
 // Invovice Route
 Route::get('/invoices', [App\Http\Controllers\InvoiceController::class, 'get_invoices_data'])->name('invoice_data');
 Route::get('/getinvoicedata', [App\Http\Controllers\InvoiceController::class, 'get_invoice_data_on_modal_load'])->name('get_invoice_data');
+Route::get('/createpdf', [App\Http\Controllers\InvoiceController::class, 'create_pdf'])->name('create_invoice_pdf');
