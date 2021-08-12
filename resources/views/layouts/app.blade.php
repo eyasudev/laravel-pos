@@ -20,7 +20,9 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <!-- Styles -->
+
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/main.css') }}" rel="stylesheet">
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/jquery-ui.css') }}" rel="stylesheet">
     <link href="{{ asset('css/select2.min.css') }}" rel="stylesheet">
@@ -101,6 +103,8 @@
         var product_url = <?php echo json_encode(route('product_data')) ?>;
         var invoice_url = <?php echo json_encode(route('invoice_data')) ?>;
         var get_invoice_url =<?php echo json_encode(route('get_invoice_data'))?>;
+        var create_invoice_pdf_url =<?php echo json_encode(route('create_invoice_pdf'))?>;
+       
         var store = <?php echo json_encode(route('customer.store')) ?>;
         var product_store = <?php echo json_encode(route('product.store')) ?>;
     </script>

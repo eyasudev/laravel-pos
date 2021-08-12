@@ -1,0 +1,68 @@
+.red {
+    border-color: red !important;
+}
+
+#invoice__modal .table-responsive {
+    border-radius: 8px;
+    height: 370px;
+}
+
+
+#invoice__modal .table.table-condensed.table-striped {
+    margin-bottom: 0px;
+}
+#invoice__modal .BI_tablehead {
+    background-color: #5e5e60;
+    color: #fff;
+}
+#invoice__modal .table-condensed>thead.BI_tablehead>tr>th {
+    padding: 20px 10px 20px 20px;
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: 14px;
+}
+#invoice__modal .table-striped>tbody>tr:nth-of-type(odd) {
+    background-color: #f6f6f6;
+}
+#invoice__modal .table>tbody>tr>td,
+#invoice__modal .table>tbody>tr>th, 
+#invoice__modal .table>tfoot>tr>td, 
+#invoice__modal .table>tfoot>tr>th, 
+#invoice__modal .table>thead>tr>td, 
+#invoice__modal .table>thead>tr>th {
+    border-top: none;
+    border-bottom: 2px solid #fff;
+}
+#invoice__modal .table-condensed>tbody.
+
+>tr>td {
+    padding: 15px 10px 15px 2
+      
+      0px;
+    text-transform: capitalize;
+    font-weight: 400;
+    font-size: 14px;
+    color: #4d4d4f;
+}
+
+#invoice__modal .fixed_header{
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+#invoice__modal .fixed_header tbody{
+  display:block;
+  width: 100%;
+  overflow: auto;
+  max-height: 400px;
+}
+
+#invoice__modal .fixed_header thead tr {
+   display: block;
+}
+
+#invoice__modal .fixed_header th, .fixed_header td {
+  padding: 5px;
+  text-align: left;
+  width: 200px;
+}

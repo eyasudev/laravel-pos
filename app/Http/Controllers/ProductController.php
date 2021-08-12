@@ -130,4 +130,14 @@ class ProductController extends Controller
           'message' => 'Data deleted successfully!'
         ]);
     }
+
+    /**
+     * Get product detail from product id.
+     * @param Request request parameters.
+     * @return product json.
+     */
+    public function get_product_data_by_id( Request $request ) {
+        $product = Product::find( $request->id);
+        return response()->json( $product,Response::HTTP_OK);
+    }
 }
