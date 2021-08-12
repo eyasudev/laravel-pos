@@ -11,15 +11,15 @@
                     <div class="form-group row">    
                         <div class="col">
                             <input type="hidden" id="customer_id" name="customer_id" value="">  
-                            <input type="text" class="form-control" id="name" name="name" value="" placeholder="Customer Name" required>
+                            <input type="text" class="form-control" id="name" name="name" value="" placeholder="Customer Name" title="Customer Name" required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col">
-                            <input type="text" class="form-control" id="phone_number" name="phone_number" value="" placeholder="Phone no" required>
+                            <input type="text" class="form-control" id="phone_number" name="phone_number" value="" placeholder="Phone no" title="Phone no" required>
                         </div>
                         <div class="col">
-                            <input type="text" class="form-control" id="address" name="address" value="" placeholder="Address" >
+                            <input type="text" class="form-control" id="address" name="address" value="" placeholder="Address" title="Address" >
                         </div>
                     </div>
                     </label><br>

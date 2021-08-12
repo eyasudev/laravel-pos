@@ -6,7 +6,9 @@
    <div class="row justify-content-center">
       <div class="col-md-12">
           <div class="card">
-            <a href="javascript:void(0)" class="btn btn-sm btn-outline-danger py-0" style="font-size: 0.8em; width:100px;" id="createNewInvoice">Add Invoice</a>
+            <div class="col ">
+               <button type="button" id="createNewInvoice" class="btn btn-md btn-primary mt-2 mb-2"> Add Invoice </button>
+            </div> 
             <table class="table table-bordered">
               <thead>
                   <tr>

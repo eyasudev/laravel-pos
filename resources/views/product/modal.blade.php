@@ -11,21 +11,21 @@
                     <div class="form-group row">
                         <div class="col">
                             <input type="hidden" id="product_id" name="product_id" value="">
-                            <input type="text" class="form-control" id="product_name" name="product_name" value="" placeholder="Product Name">
+                            <input type="text" class="form-control" id="product_name" name="product_name" value="" placeholder="Product Name" title="Product Name" >
                         </div>
                         <div class="col">
-                            <input type="text" class="form-control" id="company_name" name="company_name" value="" placeholder="Company Name">
+                            <input type="text" class="form-control" id="company_name" name="company_name" value="" placeholder="Company Name" title="Company Name">
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col">
-                            <input type="number" class="form-control" id="purchase_price" name="purchase_price" value="" placeholder="Purchase Price">
+                            <input type="number" class="form-control" id="purchase_price" name="purchase_price" value="" placeholder="Purchase Price" title="Purchase Price" >
                         </div>
                         <div class="col">
-                            <input type="number" class="form-control" id="trade_price" name="trade_price" value="" placeholder="Trade Price">
+                            <input type="number" class="form-control" id="trade_price" name="trade_price" value="" placeholder="Trade Price" title="Trade Price" >
                         </div>
                         <div class="col">
-                            <input type="number" class="form-control" id="product_packing" name="product_packing" value="" placeholder="Product Packing">
+                            <input type="number" class="form-control" id="product_packing" name="product_packing" value="" placeholder="Product Packing" title="Product Packing">
                         </div>
                     </div>
                     </label><br>

@@ -51,16 +51,6 @@ class InvoiceController extends Controller
       }
 
     public function get_invoices_data() {
-        // $customers = Customer::all();
-        // $users = User::all();
-        
-        // return \Request::ajax() ? 
-        //         response()->json(
-        //             [ 
-        //                 'customerData' => $customers,
-        //                 'users' => $users
-        //             ],Response::HTTP_OK) 
-        //         : abort(404);
     }
 
 
