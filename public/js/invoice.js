@@ -29,6 +29,13 @@ $(document).ready(function () {
 
     //Get all company
     function create_pdf() {
+        var invoiceData = {};
+        invoiceData.customer_id = $('#customer_name').val();
+        invoiceData.totalAmount = $('#total_amount').val();
+        invoiceData.receivedAmount = $('#received_amount').val();
+        invoiceData.totalproduct = tableRowInvoiceCount;
+       
+
         // $.ajax({
         //     url: create_invoice_pdf_url,
         //     type: 'GET',
@@ -49,18 +56,18 @@ $(document).ready(function () {
         // });
 
         $.ajax({
-            type: 'GET',
+            type: 'POST',
             url: create_invoice_pdf_url,
-            data: {},
-            xhrFields: {
-                responseType: 'blob'
+            data: {
+                invoiceData
             },
+            dataType: 'json',
             success: function(response){
-                var blob = new Blob([response]);
-                var link = document.createElement('a');
-                link.href = window.URL.createObjectURL(blob);
-                link.download = "Sample.pdf";
-                link.click();
+                // var blob = new Blob([response]);
+                // var link = document.createElement('a');
+                // link.href = window.URL.createObjectURL(blob);
+                // link.download = "Sample.pdf";
+                // link.click();
             },
             error: function(blob){
                 console.log(blob);
@@ -246,6 +253,18 @@ $(document).ready(function () {
             $('#row-' + id ).remove();
         });
 
+    });
+
+
+    $('#customer_name').on('change', function() {
+        console.log( get_invoice_customer_url );
+        // $.ajax({
+        //     url: product_url + "/" + this.value,
+        //     type: 'GET',
+        //     data: {}
+        // }).done(function (data) {
+        //    $('#product_price').val( data.trade_price );
+        // });
     });
 
     $('#product_list').on('change', function() {

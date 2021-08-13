@@ -102,6 +102,7 @@
         var root_url = <?php echo json_encode(route('data')) ?>;
         var product_url = <?php echo json_encode(route('product_data')) ?>;
         var invoice_url = <?php echo json_encode(route('invoice_data')) ?>;
+        var get_invoice_customer_url = <?php echo json_encode(route('get_customer_invoice')) ?>;
         var get_invoice_url =<?php echo json_encode(route('get_invoice_data'))?>;
         var create_invoice_pdf_url =<?php echo json_encode(route('create_invoice_pdf'))?>;
        
