@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\customer;
 use App\Models\Product;
+use App\Models\Invoice;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use PDF;
@@ -35,23 +36,36 @@ class InvoiceController extends Controller
 
 
     // Generate PDF
-    public function create_pdf() {
+    public function create_pdf( Request $request ) {
+        // get customer object.
+        $customer = Customer::find($request->invoiceData['customer_id']);
 
-        $array = ["property" => "property", "second" => "b"];
-        $data = (object) $array;
-        $pdf = PDF::loadView('invoice.pdf_view', compact( 'data',$data));
+        $invoice = new Invoice;
+        $invoice->customerid = $request->invoiceData['customer_id'];
+        $invoice->totalproduct = $request->invoiceData['totalproduct'];
+        $invoice->totalAmount = $request->invoiceData['totalAmount'];
+        $invoice->receiveAmount =$request->invoiceData['receivedAmount'];
+        $invoice->save();
+        
+        // $array = ["property" => "property", "second" => "b"];
+        // $data = (object) $array;
+        // $pdf = PDF::loadView('invoice.pdf_view', compact( 'data',$data));
   
-        // download PDF file with download method
-        $path = public_path('pdf/');
-        $fileName =  time().'.'. 'pdf' ;
-        $pdf->save($path . '/' . $fileName);
+        // // download PDF file with download method
+        // $path = public_path('pdf/');
+        // $fileName =  time().'.'. 'pdf' ;
+        // $pdf->save($path . '/' . $fileName);
 
-        $pdf = public_path('pdf/'.$fileName);
-        return response()->download($pdf);
+        // $pdf = public_path('pdf/'.$fileName);
+        //  response()->download($pdf);
       }
 
     public function get_invoices_data() {
     }
 
+
+    public function get_customer_invoices_content() {
+
+    }
 
 }

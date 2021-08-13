@@ -68,10 +68,13 @@
                         <h4> Total Amount: </h4>
                     </div>
                     <div class="col">
-                        <input type="text" class="form-control" id="customer_due" name="name" value="" placeholder="Customer Due">
+                        <input type="text" class="form-control" id="customer_due" name="name" value="" placeholder="Customer Dues" disabled>
                     </div>
                     <div class="col">
-                    <input type="text" class="form-control" id="total_amount" name="name" value="" placeholder="Total Amount">
+                    <input type="text" class="form-control" id="total_amount" name="name" value="" placeholder="Total Amount" disabled>
+                    </div>
+                    <div class="col">
+                        <input type="text" class="form-control" id="received_amount" name="name" value="" placeholder="Received Amount">
                     </div>
                 </div>
             </div>
