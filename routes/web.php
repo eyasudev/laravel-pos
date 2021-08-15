@@ -25,6 +25,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/customer', [App\Http\Controllers\CustomerController::class, 'index'])->name('home');
     Route::get('/product', [App\Http\Controllers\ProductController::class, 'index'])->name('home');
     Route::get('/invoice', [App\Http\Controllers\InvoiceController::class, 'index'])->name('home');
+    Route::get('/report', [App\Http\Controllers\ReportController::class, 'index'])->name('home');
 });
 
 
@@ -49,3 +50,6 @@ Route::get('/invoices', [App\Http\Controllers\InvoiceController::class, 'get_inv
 Route::get('/invoices/customer', [App\Http\Controllers\InvoiceController::class, 'get_customer_invoices_content'])->name('get_customer_invoice');
 Route::get('/getinvoicedata', [App\Http\Controllers\InvoiceController::class, 'get_invoice_data_on_modal_load'])->name('get_invoice_data');
 Route::post('/createpdf', [App\Http\Controllers\InvoiceController::class, 'create_pdf'])->name('create_invoice_pdf');
+Route::delete('/invoices/{id}', [App\Http\Controllers\InvoiceController::class, 'destroy'])->name('invoice.destroy');
+Route::get('/invoices/{id}/edit', [App\Http\Controllers\InvoiceController::class, 'update'])->name('invoice.update');
+

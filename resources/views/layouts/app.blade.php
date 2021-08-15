@@ -52,6 +52,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="/invoice">Add New Invoice</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/report">Generate Report</a>
+                            </li>
                         @endguest
                     </ul>
 
@@ -105,7 +108,6 @@
         var get_invoice_customer_url = <?php echo json_encode(route('get_customer_invoice')) ?>;
         var get_invoice_url =<?php echo json_encode(route('get_invoice_data'))?>;
         var create_invoice_pdf_url =<?php echo json_encode(route('create_invoice_pdf'))?>;
-       
         var store = <?php echo json_encode(route('customer.store')) ?>;
         var product_store = <?php echo json_encode(route('product.store')) ?>;
     </script>

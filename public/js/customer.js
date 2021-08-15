@@ -135,6 +135,7 @@ $(document).ready(function () {
             $('#name').val(data.data.name);
             $('#address').val(data.data.area);
             $('#phone_number').val(data.data.phone_number);
+            $('#customerAlert').hide();
         })
     });
 

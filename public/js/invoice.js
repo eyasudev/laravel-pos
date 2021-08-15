@@ -1,9 +1,9 @@
-$(document).ready(function () {
-    var invoiceTotalAmount, tableRowInvoiceCount = 0;
-    var inputFieldsRegex = [
-        new RegExp(/^[0-9]+$/i)
-    ]
-    //get_invoice_data()
+$(function () {
+    var invoiceTotalAmount, tableRowInvoiceCount = 0, customerData, productData;
+    var invoiceItemList = [];
+    var inputFieldsRegex = [ new RegExp(/^[0-9]+$/i)];
+    
+    get_invoice_data();
     
     $( "#datepicker" ).datepicker();
     $( "#datepicker" ).datepicker( "setDate", new Date() );
@@ -15,26 +15,30 @@ $(document).ready(function () {
         }
     });
 
-    //Get all company
+    /**
+     * Get Invoice Data
+     */
     function get_invoice_data() {
         $.ajax({
             url: invoice_url,
             type: 'GET',
             data: {}
         }).done(function (data) {
-            table_data_row(data.data)
-            
+            table_data_row(data);
         });
     }
 
-    //Get all company
+    /**
+     * Create Pdf
+     */
     function create_pdf() {
         var invoiceData = {};
         invoiceData.customer_id = $('#customer_name').val();
         invoiceData.totalAmount = $('#total_amount').val();
         invoiceData.receivedAmount = $('#received_amount').val();
+        invoiceData.id = $('#customer_id').val();
         invoiceData.totalproduct = tableRowInvoiceCount;
-       
+        invoiceData.invoiceItemList = invoiceItemList;
 
         // $.ajax({
         //     url: create_invoice_pdf_url,
@@ -63,6 +67,15 @@ $(document).ready(function () {
             },
             dataType: 'json',
             success: function(response){
+                $('#modal-id').modal('hide');
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Success',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                get_invoice_data();
                 // var blob = new Blob([response]);
                 // var link = document.createElement('a');
                 // link.href = window.URL.createObjectURL(blob);
@@ -70,21 +83,52 @@ $(document).ready(function () {
                 // link.click();
             },
             error: function(blob){
-                console.log(blob);
+                
             }
         });
     }
 
+    //Delete Invoice
+    $('body').on('click', '#deleteInvoice', function (event) {
+        if (!confirm("Do you really want to do this?")) {
+            return false;
+        }
 
-    //Get all company
+        event.preventDefault();
+        var id = $(this).attr('data-id');
+
+        $.ajax(
+            {
+                url: invoice_url + '/' + id,
+                type: 'DELETE',
+                data: {
+                    id: id
+                },
+                success: function (response) {
+
+                    Swal.fire(
+                        'Remind!',
+                        'Product deleted successfully!',
+                        'success'
+                    )
+                    get_invoice_data();
+                }
+            });
+        return false;
+    });
+
+    /**
+     * Get invoice data on modal load.
+     */
     function get_invoice_data_on_modal_load() {
-        console.log( get_invoice_url );
         $.ajax({
             url: get_invoice_url,
             type: 'GET',
             data: {}
         }).done(function (data) {
-            //
+            customerData = data.customerData;
+            productData = data.products;
+    
             $('.js-customer').select2({
                 theme: "classic",
                 placeholder: "Select customer",
@@ -108,45 +152,43 @@ $(document).ready(function () {
     }
 
 
-    //Company table row
-    function table_data_row(data) {
+    /**
+     * @name table data row.
+     * @param {*} data - append table row html.
+     */
+    function table_data_row(data ) {
 
         var rows = '';
-
         $.each(data, function (key, value) {
 
             rows = rows + '<tr>';
+            rows = rows + '<td>' + value.id + '</td>';
             rows = rows + '<td>' + value.name + '</td>';
-            rows = rows + '<td>' + value.phone_number + '</td>';
+            rows = rows + '<td>' + value.totalproduct + '</td>';
             rows = rows + '<td data-id="' + value.id + '">';
-            rows = rows + '<a class="btn btn-sm btn-outline-danger py-0" style="font-size: 0.8em;" id="editCompany" data-id="' + value.id + '" data-toggle="modal" data-target="#modal-id">Edit</a> ';
-            rows = rows + '<a class="btn btn-sm btn-outline-danger py-0" style="font-size: 0.8em;" id="deleteCompany" data-id="' + value.id + '" >Delete</a> ';
+            rows = rows + '<a class="btn btn-sm btn-outline-danger py-0" style="font-size: 0.8em;" id="editInvoice" data-id="' + value.id + '" data-toggle="modal" data-target="#modal-id">Edit</a> ';
+            rows = rows + '<a class="btn btn-sm btn-outline-danger py-0" style="font-size: 0.8em;" id="deleteInvoice" data-id="' + value.id + '" >Delete</a> ';
             rows = rows + '</td>';
             rows = rows + '</tr>';
         });
 
-        $("tbody").html(rows);
+        $("#invoiceTable tbody").html(rows);
     }
     
     //Insert company data
     $("body").on("click", "#createNewInvoice", function (e) {
         
         e.preventDefault;
+        resetInvoiceModal();
         $('#userCrudModal').html("Create Invoice");
         $('#submit').val("Create inovice");
         $('#modal-id').modal('show');
         $('#customer_id').val('');
         $('#customerdata').trigger("reset");
-        // $('#product_discount').val( 0 );
-        // $('#product_price').val( 0 );
-        // $('#product_quanlity').val(0);
-
+        invoiceItemList = [];
         get_invoice_data_on_modal_load();
 
     });
-
-
-    
 
     $( "#create_invoice" ).click(function() {
         var customerName =  $('#customer_name').val();
@@ -168,6 +210,73 @@ $(document).ready(function () {
         create_pdf();
     });
 
+    //Edit Invoice.
+    $('body').on('click', '#editInvoice', function (event) {
+    
+        event.preventDefault();
+        resetInvoiceModal();
+        var id = $(this).data('id');
+        get_invoice_data_on_modal_load();
+
+        $.get(invoice_url + '/' + id + '/edit', function (data) {
+            $('#userCrudModal').html("Edit Invoice");
+            $('#create_invoice').val("Edit Invoice");
+            $('#create_invoice').text("Edit Invoice");
+            $('#customer_id').val(data.data.id);
+            $('#modal-id').modal('show');
+            $('#received_amount').val(data.data.receiveAmount);
+            invoiceTotalAmount = parseInt(data.data.totalAmount);
+            $('#total_amount').val(data.data.totalAmount);
+            $("#customer_name").select2("val", data.data.customerid.toString());
+            $('#datepicker').datepicker("setDate", new Date(data.data.created_at) );
+            appendProductInvoiceItemListToTable( data.data.invoiceItem );
+        })
+    });
+
+    /***
+     * Reset Invoice Modal Field.
+     */
+    function resetInvoiceModal() {
+        var invoiceCount = 0;
+        $('#received_amount').val(0);
+        $('#total_amount').val(0);
+        $("#customer_name").val("");
+        $('#datepicker').datepicker("setDate", new Date() );
+        
+        for ( var i = 0 ; i < invoiceItemList.length ; i++ ) {
+            invoiceCount++;
+            $('#row-' + invoiceCount ).remove();
+        }
+    }
+
+    /**
+     * @name appendProductInvoiceItemListToTable
+     * @description append product invoice list to table.
+     * @param {*} value 
+     */
+     function appendProductInvoiceItemListToTable( value ) {
+        var rows = '';
+        for ( var i = 0 ; i < value.length ; i++  ) {
+            tableRowInvoiceCount ++;
+            rows = rows + '<tr  id="row-' + tableRowInvoiceCount + '" >';
+            rows = rows + '<td>' + product_name_by_id( value[i].productid )  + '</td>';
+            rows = rows + '<td>' + value[i].productquanlity + '</td>';
+            rows = rows + '<td>' + value[i].productprice + '</td>';
+            rows = rows + '<td>' + value[i].productdiscount + '</td>';
+            rows = rows + '<td id="total-amount-' + tableRowInvoiceCount + '">' + value[i].totalAmount + '</td>';
+            rows = rows + '<td> <button data-id=' + tableRowInvoiceCount +  ' type="button" id="delete-row" class="delete btn btn-primary btn-sm">Delete</button> </td>';
+            rows = rows + '</tr>';
+        }
+        
+        invoiceItemList.push( value );
+        $("#productInvoiceList tbody").append(rows);
+    }
+
+    function product_name_by_id ( id ) {
+        const result = productData.filter( product => product.id == id );
+        return result[0].product_name;
+    }
+
 
     $('#add_product').click(function(){
         var productInvoiceList = {};
@@ -177,7 +286,7 @@ $(document).ready(function () {
         productInvoiceList.productQuanlity = $('#product_quanlity').val();
         productInvoiceList.productList = $('#product_list').val();
         productInvoiceList.productListTitle = $('#product_list option:selected').text();
-    
+        productInvoiceList.productListTitleId = $('#product_list option:selected').val();
         if ( !productInvoiceList.productList ) {
             isValid = false;
             alert( 'Select Product' );
@@ -212,11 +321,18 @@ $(document).ready(function () {
                 productInvoiceList.totalAmount = parseInt( productInvoiceList.productPrice ) * parseInt( productInvoiceList.productQuanlity );
             }
         
-            appendProductInvoiceListToTable( productInvoiceList );
+            appendProductInvoiceListToTable( productInvoiceList ); // function call.
 
         }
 
+        /**
+         * @name appendProductInvoiceListToTable
+         * @description append product invoice list to table.
+         * @param {*} value 
+         */
         function appendProductInvoiceListToTable( value ) {
+            //console.log( value );
+            // console.log( $('#total_amount').val() );
             var rows = '';
             tableRowInvoiceCount ++;
             rows = rows + '<tr  id="row-' + tableRowInvoiceCount + '" >';
@@ -225,12 +341,12 @@ $(document).ready(function () {
             rows = rows + '<td>' + value.productPrice + '</td>';
             rows = rows + '<td>' + value.productDiscount + '</td>';
             rows = rows + '<td id="total-amount-' + tableRowInvoiceCount + '">' + value.totalAmount + '</td>';
-            rows = rows + '<td> <button data-id=' + tableRowInvoiceCount +  ' type="button" class="delete btn btn-primary btn-sm">Delete</button> </td>';
+            rows = rows + '<td> <button data-id=' + tableRowInvoiceCount +  ' type="button" id="delete-row" class="delete btn btn-primary btn-sm">Delete</button> </td>';
             rows = rows + '</tr>';
-            
+            invoiceItemList.push( value );
             $("#productInvoiceList tbody").append(rows);
             
-            if ( $('#total_amount').val() == '' ) {
+            if ( $('#total_amount').val() == '' || $('#total_amount').val() == 0 ) {
                 invoiceTotalAmount = value.totalAmount;
                 $('#total_amount').val( invoiceTotalAmount  );
                  
@@ -239,33 +355,21 @@ $(document).ready(function () {
                 $('#total_amount').val(invoiceTotalAmount);
             }
         }
-
-        $( ".delete" ).click(function( event ) {
-            event.preventDefault();
-            var id = $(this).attr('data-id');
-            tableRowInvoiceCount --;
-
-            let totalAmount = $('#total_amount').val();
-            totalAmount = totalAmount - $('#total-amount-' + id ).text();
-            $('#total_amount').val(totalAmount);
-
-
-            $('#row-' + id ).remove();
-        });
-
     });
 
+    $(document).on('click', '#delete-row', function(){ 
+        // Your Code
+        var id = $(this).attr('data-id');
+        tableRowInvoiceCount --;
 
-    $('#customer_name').on('change', function() {
-        console.log( get_invoice_customer_url );
-        // $.ajax({
-        //     url: product_url + "/" + this.value,
-        //     type: 'GET',
-        //     data: {}
-        // }).done(function (data) {
-        //    $('#product_price').val( data.trade_price );
-        // });
+        let totalAmount = $('#total_amount').val();
+        totalAmount = totalAmount - $('#total-amount-' + id ).text();
+        $('#total_amount').val(totalAmount);
+        
+        $('#row-' + id ).remove();
     });
+
+    $('#customer_name').on('change', function() {});
 
     $('#product_list').on('change', function() {
         
@@ -287,8 +391,4 @@ $(document).ready(function () {
         var productQuanlity = $('#product_quanlity').val();
        
     });
-
-
-
-
 }); 

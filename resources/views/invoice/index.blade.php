@@ -9,11 +9,12 @@
             <div class="col ">
                <button type="button" id="createNewInvoice" class="btn btn-md btn-primary mt-2 mb-2"> Add Invoice </button>
             </div> 
-            <table class="table table-bordered">
+            <table id="invoiceTable" class="table table-bordered">
               <thead>
                   <tr>
                      <th>Invoice Id</th>
                      <th>Customer Number</th>
+                     <th>Total Product</th>
                      <th width="200px">Action</th>
                   </tr>
               </thead>
