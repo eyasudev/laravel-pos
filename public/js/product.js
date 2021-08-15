@@ -4,7 +4,8 @@ $(document).ready(function () {
     var inputFieldsRegex = [
         new RegExp(/^[a-z ,.'-]+$/i), 
         new RegExp(/^[a-zA-Z0-9\s,'-]*$/i), // Company name/ Product.
-        new RegExp(/^(\+92|0|92)[0-9]{10}$/i) // Phone Number
+        new RegExp(/^(\+92|0|92)[0-9]{10}$/i), // Phone Number,
+        new RegExp(/^[+-]?([0-9]+\.?[0-9]*|\.[0-9]+)$/) // trade price & purchase
     ]
 
     $.ajaxSetup({
@@ -67,9 +68,11 @@ $(document).ready(function () {
         var tradePrice = $("#trade_price").val();
         var productPacking = $("#product_packing").val();
         
-        if (  productName && inputFieldsRegex[1].test( productName ) == true && companyName && inputFieldsRegex[0].test( companyName ) == true && 
-                inputFieldsRegex[2].test( purchasePrice ) == true && inputFieldsRegex[2].test( tradePrice ) == true &&
-                inputFieldsRegex[2].test( productPacking ) == true    
+        if (    productName && inputFieldsRegex[1].test( productName ) == true && 
+                companyName && inputFieldsRegex[0].test( companyName ) == true && 
+                inputFieldsRegex[3].test( purchasePrice ) == true && 
+                inputFieldsRegex[3].test( tradePrice ) == true &&
+                inputFieldsRegex[3].test( productPacking ) == true    
             ) {
                 $.ajax({
                     url: product_store,
@@ -116,17 +119,17 @@ $(document).ready(function () {
                 $('#company_name').addClass('red');
             }
 
-            if ( !purchasePrice || inputFieldsRegex[1].test( purchasePrice ) == false ) {
+            if ( !purchasePrice || inputFieldsRegex[3].test( purchasePrice ) == false ) {
                 productInvalidInput += ", Purchase price ";
                 $('#purchase_price').addClass('red');
             }
 
-            if ( !tradePrice || inputFieldsRegex[1].test( tradePrice ) == false ) {
+            if ( !tradePrice || inputFieldsRegex[3].test( tradePrice ) == false ) {
                 productInvalidInput += ", Trade price ";
                 $('#trade_price').addClass('red');
             }
 
-            if ( !productPacking || inputFieldsRegex[1].test( productPacking ) == false ) {
+            if ( !productPacking || inputFieldsRegex[3].test( productPacking ) == false ) {
                 productInvalidInput += ", Product packing ";
                 $('#product_packing').addClass('red');
             }
@@ -156,6 +159,7 @@ $(document).ready(function () {
             $('#purchase_price').val(data.data.purchase_price);
             $('#trade_price').val(data.data.trade_price);
             $('#product_packing').val(data.data.product_packing);
+            $('#productAlert').hide();
         })
     });
 

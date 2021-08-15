@@ -15,11 +15,13 @@ class customer extends Model
         'area'
     ];
 
+    /***
+     * User belong to user.
+     */
     public function user(){
         return $this->belongsTo(User::class);
     }
     
-
     /**
      * Get Invoice for the customer.
      * */

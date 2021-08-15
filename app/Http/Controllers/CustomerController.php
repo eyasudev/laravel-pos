@@ -13,18 +13,13 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index(){
         return view('customer.index');
     }
 
-    public function get_customer_data(Request $request)
-    {
-      $customers = Customer::latest()->paginate(5);
-
-      return \Request::ajax() ? 
-                response()->json($customers,Response::HTTP_OK) 
-                : abort(404);
+    public function get_customer_data(Request $request){
+        $customers = Customer::latest()->paginate(5);
+        return \Request::ajax() ?  response()->json($customers,Response::HTTP_OK) : abort(404);
     }
 
 
@@ -33,8 +28,7 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create(){
         //
     }
 
@@ -44,8 +38,7 @@ class CustomerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request){
         Customer::updateOrCreate(
         [
             'id' => $request->id
@@ -71,8 +64,7 @@ class CustomerController extends Controller
      * @param  \App\Models\customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function show(customer $customer)
-    {
+    public function show(customer $customer){
         //
     }
 
@@ -82,8 +74,7 @@ class CustomerController extends Controller
      * @param  \App\Models\customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function edit(customer $customer)
-    {
+    public function edit(customer $customer){
         //
     }
 
@@ -94,9 +85,8 @@ class CustomerController extends Controller
      * @param  \App\Models\customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function update($id)
-    {
-        //
+    public function update($id){
+        
         $customer  = Customer::find($id);
 
         return response()->json([
@@ -110,8 +100,7 @@ class CustomerController extends Controller
      * @param  \App\Models\customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id){
         $customer = Customer::find($id);
 
         $customer->delete();

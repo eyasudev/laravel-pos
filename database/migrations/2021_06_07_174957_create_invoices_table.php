@@ -12,16 +12,19 @@ class CreateInvoicesTable extends Migration
      * @return void
      */
     public function up()
-    {
-        Schema::create('invoices', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('customerid');
-            $table->integer('totalproduct');
-            $table->string('totalAmount');
-            $table->string('receiveAmount');
-            $table->foreign('customerid')->references('id')->on('customers')->onDelete('cascade');
-            $table->timestamps();
-        });
+    {   
+        if(!Schema::hasTable('invoices')){
+            Schema::create('invoices', function (Blueprint $table) {
+                $table->id();
+                $table->unsignedBigInteger('customerid');
+                $table->integer('totalproduct');
+                $table->string('totalAmount');
+                $table->string('receiveAmount');
+                $table->foreign('customerid')->references('id')->on('customers')->onDelete('cascade');
+                $table->timestamps();
+            });
+        }
+        
     }
 
     /**

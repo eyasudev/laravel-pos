@@ -10,6 +10,7 @@
                 <div id="customerdata">
                     <div class="form-group row">
                         <div class="col">
+                        <input type="hidden" id="customer_id" name="customer_id" value="">
                             <select class="js-customer js-states form-control" id="customer_name" name="state">
                                 <option value=""></option>
                             </select>
